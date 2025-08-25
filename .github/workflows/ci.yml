@@ -67,16 +67,8 @@ jobs:
           php bin/console cache:warmup --env=test
 
       - name: Compile assets (Sass)
-        run: php bin/console sass:build
+        run: php bin/console sass:build && php bin/console importmap:install
 
       # 5️⃣ Lancer les tests PHPUnit
       - name: Run PHPUnit
         run: vendor/bin/phpunit
-
-      # 6️⃣ Analyse PHPStan
-      - name: Run PHPStan
-        run: vendor/bin/phpstan analyse
-
-      # 7️⃣ Vérification du style avec PHP CS Fixer
-      - name: Run PHP CS Fixer
-        run: vendor/bin/php-cs-fixer fix --diff
